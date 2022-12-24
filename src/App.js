@@ -29,13 +29,13 @@ function App() {
         <Route path="/graph" component={Graph} />
 
         <Route
-          path="/mynotes"
+          path="/homepage"
           component={({ history }) => (
             <MyNotes search={search} history={history} />
           )}
         />
         <Route path="/note/:id" component={SingleNote} />
-        <Route path="/createnote" component={CreateNote} />;
+        <Route path="/createEvent" component={CreateNote} />;
         <Route path="/profile" component={ProfileScreen} />
       </main>
       <Footer />
