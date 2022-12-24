@@ -63,12 +63,12 @@ const ProfileScreen = ({ location, history }) => {
     // if (!userInfo) {
     //   history.push("/");
     // } else {
-      setName(userInfo.name);
-      setEmail(userInfo.email);
-      setPosition(userInfo.position);
-      setDept(userInfo.department);
-      setYear(userInfo.year);
-      setLinkedin(userInfo.linkedin);
+      // setName(userInfo.name);
+      // setEmail(userInfo.email);
+      // setPosition(userInfo.position);
+      // setDept(userInfo.department);
+      // setYear(userInfo.year);
+      // setLinkedin(userInfo.linkedin);
     // }
   }, [history, userInfo]);
 
