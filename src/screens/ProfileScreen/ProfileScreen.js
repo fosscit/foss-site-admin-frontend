@@ -60,16 +60,16 @@ const ProfileScreen = ({ location, history }) => {
 
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/");
-    } else {
+    // if (!userInfo) {
+    //   history.push("/");
+    // } else {
       setName(userInfo.name);
       setEmail(userInfo.email);
       setPosition(userInfo.position);
       setDept(userInfo.department);
       setYear(userInfo.year);
       setLinkedin(userInfo.linkedin);
-    }
+    // }
   }, [history, userInfo]);
 
   // const postDetails = (pics) => {

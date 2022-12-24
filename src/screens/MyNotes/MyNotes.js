@@ -82,9 +82,9 @@ function MyNotes({ history, search }) {
 
   useEffect(() => {
     dispatch(listNotes());
-    if (!userInfo) {
-      history.push("/");
-    }
+    // if (!userInfo) {
+    //   history.push("/");
+    // }
   }, [
     dispatch,
     history,
