@@ -19,7 +19,7 @@ function LoginScreen({ history }) {
 
   useEffect(() => {
     if (userInfo) {
-      history.push("/mynotes");
+      history.push("/myevents");
     }
   }, [history, userInfo]);
 

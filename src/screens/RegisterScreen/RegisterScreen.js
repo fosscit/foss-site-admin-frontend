@@ -33,6 +33,7 @@ function RegisterScreen({ history }) {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
+  //converting any uploaded image to a link
   const postDetails = (pics) => {
     if (
       pics ===

@@ -29,6 +29,26 @@ const ProfileScreen = ({ location, history }) => {
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading, error, success } = userUpdate;
 
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/");
+    } else {
+      setName(userInfo.name);
+      setEmail(userInfo.email);
+      setPosition(userInfo.position);
+      setDept(userInfo.department);
+      setYear(userInfo.year);
+      setLinkedin(userInfo.linkedin);
+      setPic(userInfo.pic)
+    }
+  }, [history, userInfo]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(updateProfile({ name, email, password, position, department, year, linkedin, pic}));
+  };
+
   const postDetails = (pics) => {
     if (
       pics ===
@@ -56,50 +76,6 @@ const ProfileScreen = ({ location, history }) => {
     } else {
       return setPicMessage("Please Select an Image");
     }
-  };
-
-
-  useEffect(() => {
-    // if (!userInfo) {
-    //   history.push("/");
-    // } else {
-      // setName(userInfo.name);
-      // setEmail(userInfo.email);
-      // setPosition(userInfo.position);
-      // setDept(userInfo.department);
-      // setYear(userInfo.year);
-      // setLinkedin(userInfo.linkedin);
-    // }
-  }, [history, userInfo]);
-
-  // const postDetails = (pics) => {
-  //   setPicMessage(null);
-  //   if (pics.type === "image/jpeg" || pics.type === "image/png") {
-  //     const data = new FormData();
-  //     data.append("file", pics);
-  //     data.append("upload_preset", "notezipper");
-  //     data.append("cloud_name", "piyushproj");
-  //     fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
-  //       method: "post",
-  //       body: data,
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setPic(data.url.toString());
-  //         console.log(pic);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   } else {
-  //     return setPicMessage("Please Select an Image");
-  //   }
-  // };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    dispatch(updateProfile({ name, email, password, position, department, year, linkedin}));
   };
 
   return (
@@ -175,6 +151,9 @@ const ProfileScreen = ({ location, history }) => {
             />
           </Form.Group>
 
+          {picMessage && (
+            <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
+          )}
           <Form.Group controlId="pic">
             <Form.Label>Profile Picture</Form.Label>
             <Form.File

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import MainScreen from "../../components/MainScreen";
+import axios from "axios";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { createNoteAction } from "../../actions/notesActions";
-import Loading from "../../components/Loading";
+import { deleteEventAction, updateEventAction } from "../../actions/eventsActions";
 import ErrorMessage from "../../components/ErrorMessage";
+import Loading from "../../components/Loading";
 import ReactMarkdown from "react-markdown";
+import DatePicker from "react-datepicker";
 
-function CreateNote({ history }) {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
-  const [date, setDate] = useState(new Date());
+function SingleEvent({ match, history }) {
+  
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [category, setCategory] = useState();
+  const [date, setDate] = useState("");
+  const [eventDate, setEventDate] = useState(new Date());
   const [time, setTime] = useState("");
   const [venue, setVenue] = useState("");
   const [link, setLink] = useState("");
@@ -23,8 +25,6 @@ function CreateNote({ history }) {
     "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
   );
   const [picMessage, setPicMessage] = useState(null);
-
-  const dispatch = useDispatch();
 
   const postDetails = (pics) => {
     if (
@@ -55,44 +55,77 @@ function CreateNote({ history }) {
     }
   };
 
-  const noteCreate = useSelector((state) => state.noteCreate);
-  const { loading, error, note } = noteCreate;
+  const dispatch = useDispatch();
+
+  const eventUpdate = useSelector((state) => state.eventUpdate);
+  const { loading, error } = eventUpdate;
+
+  const eventDelete = useSelector((state) => state.eventDelete);
+  const { loading: loadingDelete, error: errorDelete } = eventDelete;
+
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure?")) {
+      dispatch(deleteEventAction(id));
+    }
+    history.push("/myevents");
+  };
+
+  useEffect(() => {
+    const fetching = async () => {
+      const { data } = await axios.get(`/api/events/${match.params.id}`);
+
+      setTitle(data.title);
+      setContent(data.content);
+      setCategory(data.category);
+      setDate(data.updatedAt);
+      setEventDate(new Date());
+      setTime(data.time);
+      setVenue(data.venue);
+      setLink(data.link);
+      setMaterials(data.materials);
+      setSpeaker(data.speaker);
+    };
+
+    fetching();
+  }, [match.params.id, date]);
 
   const resetHandler = () => {
     setTitle("");
     setCategory("");
     setContent("");
-    setDate(new Date());
+    setEventDate(new Date());
     setTime("");
     setVenue("");
     setLink("");
     setMaterials("");
   };
 
-  const submitHandler = (e) => {
+  const updateHandler = (e) => {
     e.preventDefault();
-    dispatch(createNoteAction(title, content, category, date));
+    dispatch(updateEventAction(match.params.id, title, content, category, eventDate, time, venue, link, materials, speaker, pic));
     if (!title || !content || !category) return;
 
     resetHandler();
-    history.push("/mynotes");
+    history.push("/myevents");
   };
 
-  useEffect(() => {}, []);
-
   return (
-    <MainScreen title="Add a new Event">
+    <MainScreen title="Edit Note">
       <Card>
-        <Card.Header>Create a new Note</Card.Header>
+        <Card.Header>Edit your Note</Card.Header>
         <Card.Body>
-          <Form onSubmit={submitHandler}>
+          <Form onSubmit={updateHandler}>
+            {loadingDelete && <Loading />}
             {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+            {errorDelete && (
+              <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+            )}
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="title"
-                value={title}
                 placeholder="Enter the title"
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </Form.Group>
@@ -101,9 +134,9 @@ function CreateNote({ history }) {
               <Form.Label>Content</Form.Label>
               <Form.Control
                 as="textarea"
-                value={content}
                 placeholder="Enter the content"
                 rows={4}
+                value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
             </Form.Group>
@@ -120,11 +153,12 @@ function CreateNote({ history }) {
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type="content"
-                value={category}
                 placeholder="Enter the Category"
+                value={category}
                 onChange={(e) => setCategory(e.target.value)}
               />
             </Form.Group>
+
 
             <Form.Group controlId="content">
               <Form.Label>Speaker</Form.Label>
@@ -176,7 +210,7 @@ function CreateNote({ history }) {
               />
             </Form.Group>
 
-            <DatePicker selected={date} onChange={date => setDate(date)} />
+            <DatePicker selected={eventDate} onChange={date => setEventDate(date)} />
 
             <Form.Group controlId="pic">
             <Form.Label>Poster</Form.Label>
@@ -189,22 +223,27 @@ function CreateNote({ history }) {
               />
             </Form.Group>
 
+
             {loading && <Loading size={50} />}
-            <Button type="submit" variant="primary">
-              Create Note
+            <Button variant="primary" type="submit">
+              Update Event
             </Button>
-            <Button className="mx-2" onClick={resetHandler} variant="danger">
-              Reset Feilds
+            <Button
+              className="mx-2"
+              variant="danger"
+              onClick={() => deleteHandler(match.params.id)}
+            >
+              Delete Event
             </Button>
           </Form>
         </Card.Body>
 
         <Card.Footer className="text-muted">
-          Creating on - {new Date().toLocaleDateString()}
+          Updated on - {date.substring(0, 10)}
         </Card.Footer>
       </Card>
     </MainScreen>
   );
 }
 
-export default CreateNote;
+export default SingleEvent;
