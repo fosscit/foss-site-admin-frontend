@@ -42,7 +42,7 @@ function removeUser({ history, search }) {
       dispatch(deleteUserAction(id));
     }
   };
-  const notes = [];
+  
   return (
     <MainScreen >
     
@@ -54,6 +54,7 @@ function removeUser({ history, search }) {
       {loadingDelete && <Loading />}
       {users &&
         users
+          .filter((user) => user.isAdmin === false)
           .reverse()
           .map((user) => (
             <Accordion>
