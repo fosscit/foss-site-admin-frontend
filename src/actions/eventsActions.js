@@ -30,7 +30,7 @@ export const listEvents = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/events`, config);
+    const { data } = await axios.get(`https://foss-backend.onrender.com/api/events`, config);
 
     dispatch({
       type: EVENTS_LIST_SUCCESS,
@@ -69,7 +69,7 @@ export const createEventAction = (title, content, category, date, time, venue, l
     };
 
     const { data } = await axios.post(
-      `/api/events/create`,
+      `https://foss-backend.onrender.com/api/events/create`,
       { title, content, category, date, time, venue, link, materials, speaker, pic },
       config
     );
@@ -106,7 +106,7 @@ export const deleteEventAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/events/${id}`, config);
+    const { data } = await axios.delete(`https://foss-backend.onrender.com/api/events/${id}`, config);
 
     dispatch({
       type: EVENTS_DELETE_SUCCESS,
@@ -145,7 +145,7 @@ export const updateEventAction = (id, title, content, category, eventDate, time,
     };
 
     const { data } = await axios.put(
-      `/api/events/${id}`,
+      `https://foss-backend.onrender.com/api/events/${id}`,
       { title, content, category, eventDate, time, venue, link, materials, speaker, pic },
       config
     );

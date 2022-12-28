@@ -29,7 +29,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/users/login",
+      "https://foss-backend.onrender.com/api/users/login",
       { email, password },
       config
     );
@@ -64,7 +64,7 @@ export const register = (name, email, password, position, department, pic, year,
     };
 
     const { data } = await axios.post(
-      "/api/users",
+      "https://foss-backend.onrender.com/api/users",
       { name, pic, email, password, department, position, year, linkedin },
       config
     );
@@ -100,7 +100,7 @@ export const updateProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post("/api/users/profile", user, config);
+    const { data } = await axios.post("https://foss-backend.onrender.com/api/users/profile", user, config);
 
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
 
@@ -134,7 +134,7 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users`, config);
+    const { data } = await axios.get(`https://foss-backend.onrender.com/api/users`, config);
 
     dispatch({
       type: USER_LIST_SUCCESS,
@@ -168,7 +168,7 @@ export const deleteUserAction = (id) => async (dispatch, getState) => {
       },
     };
     
-    const { data } = await axios.post(`/api/users/delete`, { id }, config);
+    const { data } = await axios.post(`https://foss-backend.onrender.com/api/users/delete`, { id }, config);
 
     dispatch({
       type: USER_DELETE_SUCCESS,
