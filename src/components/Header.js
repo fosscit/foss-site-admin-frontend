@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Form,
@@ -45,8 +45,8 @@ function Header({ setSearch }) {
           <Nav>
             {userInfo ? (
               <>
-                <Nav.Link href="/register">Add Member</Nav.Link>
-                <Nav.Link href="/remove">Remove Member</Nav.Link>
+                {userInfo.isAdmin && <Nav.Link href="/register">Add Member</Nav.Link>}
+                {userInfo.isAdmin && <Nav.Link href="/remove">Remove Member</Nav.Link>}
                 <Nav.Link href="/myevents">Home</Nav.Link>
                 <NavDropdown
                   title={`${userInfo.name}`}

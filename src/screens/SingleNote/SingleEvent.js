@@ -72,18 +72,19 @@ function SingleEvent({ match, history }) {
 
   useEffect(() => {
     const fetching = async () => {
-      const { data } = await axios.get(`/api/events/${match.params.id}`);
-
+      const { data } = await axios.get(`https://foss-backend.onrender.com/api/events/${match.params.id}`);
+      
       setTitle(data.title);
       setContent(data.content);
       setCategory(data.category);
       setDate(data.updatedAt);
-      setEventDate(new Date());
+      setEventDate(new Date(data.eventDate.slice(0, 10)));
       setTime(data.time);
       setVenue(data.venue);
       setLink(data.link);
       setMaterials(data.materials);
       setSpeaker(data.speaker);
+      setPic(data.pic);
     };
 
     fetching();

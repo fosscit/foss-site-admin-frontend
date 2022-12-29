@@ -12,10 +12,7 @@ function RegisterScreen({ history }) {
 
   let currentUserName = null;
   const userLogin = useSelector((state) => state.userLogin);
-  if(userLogin.userInfo) {
-    currentUserName = userLogin.userInfo.name;
-  } 
-
+  
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
@@ -71,7 +68,7 @@ function RegisterScreen({ history }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if(currentUserName && currentUserName === "admin")
+    if(userInfo && userInfo.isAdmin)
       dispatch(register(name, email, password, position, department, pic, year, linkedin));
     else
       console.log("User is not admin");
