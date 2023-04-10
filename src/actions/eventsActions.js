@@ -14,6 +14,9 @@ import {
 } from "../constants/eventsConstants";
 import axios from "axios";
 
+const uri = "https://foss-backend.onrender.com/api/events/event/";
+// const uri = "http://localhost:5000/api/events/event/";
+
 export const listEvents = () => async (dispatch, getState) => {
   try {
     dispatch({
@@ -30,7 +33,7 @@ export const listEvents = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`https://foss-backend.onrender.com/api/events`, config);
+    const { data } = await axios.get(uri, config);
 
     dispatch({
       type: EVENTS_LIST_SUCCESS,
@@ -48,7 +51,7 @@ export const listEvents = () => async (dispatch, getState) => {
   }
 };
 
-export const createEventAction = (title, content, category, date, time, venue, link, materials, speaker, pic) => async (
+export const createEventAction = (title, content, category, date, time, venue, link, materials, speaker, pic, startYear, endYear) => async (
   dispatch,
   getState
 ) => {
@@ -69,8 +72,8 @@ export const createEventAction = (title, content, category, date, time, venue, l
     };
 
     const { data } = await axios.post(
-      `https://foss-backend.onrender.com/api/events/create`,
-      { title, content, category, date, time, venue, link, materials, speaker, pic },
+      `${uri}create`,
+      { title, content, category, date, time, venue, link, materials, speaker, pic, startYear, endYear },
       config
     );
 
@@ -106,7 +109,7 @@ export const deleteEventAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(`https://foss-backend.onrender.com/api/events/${id}`, config);
+    const { data } = await axios.delete(`${uri}${id}`, config);
 
     dispatch({
       type: EVENTS_DELETE_SUCCESS,
@@ -124,7 +127,7 @@ export const deleteEventAction = (id) => async (dispatch, getState) => {
   }
 };
 
-export const updateEventAction = (id, title, content, category, eventDate, time, venue, link, materials, speaker, pic) => async (
+export const updateEventAction = (id, title, content, category, eventDate, time, venue, link, materials, speaker, pic, startYear, endYear) => async (
   dispatch,
   getState
 ) => {
@@ -145,8 +148,8 @@ export const updateEventAction = (id, title, content, category, eventDate, time,
     };
 
     const { data } = await axios.put(
-      `https://foss-backend.onrender.com/api/events/${id}`,
-      { title, content, category, eventDate, time, venue, link, materials, speaker, pic },
+      `${uri}${id}`,
+      { title, content, category, eventDate, time, venue, link, materials, speaker, pic, startYear, endYear },
       config
     );
 

@@ -1,0 +1,71 @@
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: 50px 0;
+}
+
+.text-heading {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.recharts-cartesian-grid-horizontal line {
+  stroke: #ccc;
+  stroke-width: 1px;
+  stroke-dasharray: 4 4;
+}
+
+.recharts-cartesian-axis-tick-line {
+  display: none;
+}
+
+.recharts-cartesian-axis-tick-value {
+  font-size: 14px;
+  fill: #333;
+}
+
+.recharts-cartesian-axis-domain {
+  display: none;
+}
+
+.recharts-legend-wrapper {
+  font-size: 14px;
+  fill: #333;
+}
+
+.recharts-tooltip-wrapper {
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.recharts-tooltip-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.recharts-tooltip-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.recharts-tooltip-item-name {
+  margin-right: 10px;
+}
+
+.recharts-bar-rectangle {
+  fill: #0088FE;
+}
+
+.recharts-bar-rectangle:hover {
+  fill: #00C49F;
+  cursor: pointer;
+}

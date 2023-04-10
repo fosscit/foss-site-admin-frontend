@@ -26,7 +26,7 @@ function Header({ setSearch }) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
       <Container>
-        <Navbar.Brand href="/">FOSS CIT</Navbar.Brand>
+        <Navbar.Brand href="/">FOSS CIT Admin Portal</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -45,9 +45,31 @@ function Header({ setSearch }) {
           <Nav>
             {userInfo ? (
               <>
-                {userInfo.isAdmin && <Nav.Link href="/register">Add Member</Nav.Link>}
-                {userInfo.isAdmin && <Nav.Link href="/remove">Remove Member</Nav.Link>}
-                <Nav.Link href="/myevents">Home</Nav.Link>
+                <Nav.Link href="/graph">Dashboard</Nav.Link>
+                <Nav.Link href="/myevents">Events</Nav.Link>
+                <Nav.Link href="/mymessages">Messages</Nav.Link>
+                <Nav.Link href="/members">Members</Nav.Link>
+                
+                {/* <NavDropdown
+                  title={"Boardmembers"}
+                  id="collasible-nav-dropdown"
+                >
+                  <NavDropdown.Item href="/members">
+                    Members
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/addmember">
+                    Add Member
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="/editmember">
+                    Edit Member Details
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="/removemember">
+                    Remove Member
+                  </NavDropdown.Item>
+
+                </NavDropdown> */}
                 <NavDropdown
                   title={`${userInfo.name}`}
                   id="collasible-nav-dropdown"

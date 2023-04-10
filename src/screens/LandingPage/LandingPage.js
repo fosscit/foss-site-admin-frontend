@@ -29,15 +29,6 @@ function LandingPage({ history }) {
                   Login
                 </Button>
               </Link>
-              <Link to="/register">
-                <Button
-                  variant="outline-primary"
-                  size="lg"
-                  className="landingbutton"
-                >
-                  Signup
-                </Button>
-              </Link>
             </div>
           </div>
         </Row>

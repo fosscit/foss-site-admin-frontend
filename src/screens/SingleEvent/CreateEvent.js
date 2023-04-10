@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MainScreen from "../../components/MainScreen";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,6 +19,8 @@ function CreateEvent({ history }) {
   const [link, setLink] = useState("");
   const [materials, setMaterials] = useState("");
   const [speaker, setSpeaker] = useState("");
+  const [startYear, setStartYear] = useState("");
+  const [endYear, setEndYear] = useState("");
   const [pic, setPic] = useState(
     "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
   );
@@ -34,7 +36,7 @@ function CreateEvent({ history }) {
       return setPicMessage("Please Select an Image");
     }
     setPicMessage(null);
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+    if (pics.type === "image/jpeg" || pics.type === "image/png" || pics.type === "image/webp") {
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "notezipper");
@@ -67,11 +69,13 @@ function CreateEvent({ history }) {
     setVenue("");
     setLink("");
     setMaterials("");
+    setStartYear("");
+    setEndYear("");
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createEventAction(title, content, category, date, time, venue, link, materials, speaker, pic));
+    dispatch(createEventAction(title, content, category, date, time, venue, link, materials, speaker, pic, startYear, endYear));
     if (!title || !content || !category) return;
 
     resetHandler();
@@ -117,6 +121,31 @@ function CreateEvent({ history }) {
             )}
 
             <Form.Group controlId="content">
+              <Form.Label>Event Batch</Form.Label>
+              <Row>
+                <Col lg={5} md={5} sm={11} xs={11}>
+                  <Form.Control
+                    type="content"
+                    placeholder="Enter the Start Year"
+                    value={startYear}
+                    onChange={(e) => setStartYear(e.target.value)}
+                  />
+                </Col>
+                <Col>
+                  {"-"}
+                </Col>
+                <Col lg={5} md={5} sm={11} xs={11}>
+                  <Form.Control
+                    type="content"
+                    placeholder="Enter the End Year"
+                    value={endYear}
+                    onChange={(e) => setEndYear(e.target.value)}
+                  />
+                </Col>
+              </Row>
+            </Form.Group>
+
+            <Form.Group controlId="content">
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type="content"
@@ -151,7 +180,7 @@ function CreateEvent({ history }) {
               <Form.Control
                 type="content"
                 value={link}
-                placeholder="Enter the Meet Link"
+                placeholder="Enter a Relevant Link"
                 onChange={(e) => setLink(e.target.value)}
               />
             </Form.Group>
@@ -189,12 +218,16 @@ function CreateEvent({ history }) {
               />
             </Form.Group>
 
+            <Card.Text>
+              <Card.Img variant="top" src={pic} style={{objectFit: 'cover', aspectRatio: '16/9'}} />
+            </Card.Text>
+
             {loading && <Loading size={50} />}
             <Button type="submit" variant="primary">
               Add Event 
             </Button>
             <Button className="mx-2" onClick={resetHandler} variant="danger">
-              Reset Feilds
+              Reset Fields
             </Button>
           </Form>
         </Card.Body>

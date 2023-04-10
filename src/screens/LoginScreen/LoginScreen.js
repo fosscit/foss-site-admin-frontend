@@ -25,7 +25,6 @@ function LoginScreen({ history }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email, password);
     dispatch(login(email, password));
   };
 
@@ -59,11 +58,6 @@ function LoginScreen({ history }) {
             Submit
           </Button>
         </Form>
-        <Row className="py-3">
-          <Col>
-            New Customer ? <Link to="/register">Register Here</Link>
-          </Col>
-        </Row>
       </div>
     </MainScreen>
   );

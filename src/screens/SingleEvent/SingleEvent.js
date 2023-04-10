@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MainScreen from "../../components/MainScreen";
 import axios from "axios";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteEventAction, updateEventAction } from "../../actions/eventsActions";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -21,10 +21,12 @@ function SingleEvent({ match, history }) {
   const [link, setLink] = useState("");
   const [materials, setMaterials] = useState("");
   const [speaker, setSpeaker] = useState("");
+  const [startYear, setStartYear] = useState("");
+  const [endYear, setEndYear] = useState("");
   const [pic, setPic] = useState(
     "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
   );
-  const [picMessage, setPicMessage] = useState(null);
+  const [picMessage, setPicMessage] = useState("");
 
   const postDetails = (pics) => {
     if (
@@ -72,7 +74,8 @@ function SingleEvent({ match, history }) {
 
   useEffect(() => {
     const fetching = async () => {
-      const { data } = await axios.get(`https://foss-backend.onrender.com/api/events/${match.params.id}`);
+      const uri = "https://foss-backend.onrender.com/api/events/event/";
+      const { data } = await axios.get(`${uri}${match.params.id}`);
       
       setTitle(data.title);
       setContent(data.content);
@@ -85,6 +88,8 @@ function SingleEvent({ match, history }) {
       setMaterials(data.materials);
       setSpeaker(data.speaker);
       setPic(data.pic);
+      setStartYear(data.eventYear.slice(0, 4));
+      setEndYear("20" + data.eventYear.slice(7));
     };
 
     fetching();
@@ -99,11 +104,13 @@ function SingleEvent({ match, history }) {
     setVenue("");
     setLink("");
     setMaterials("");
+    setStartYear("");
+    setEndYear("");
   };
 
   const updateHandler = (e) => {
     e.preventDefault();
-    dispatch(updateEventAction(match.params.id, title, content, category, eventDate, time, venue, link, materials, speaker, pic));
+    dispatch(updateEventAction(match.params.id, title, content, category, eventDate, time, venue, link, materials, speaker, pic, startYear, endYear));
     if (!title || !content || !category) return;
 
     resetHandler();
@@ -111,7 +118,7 @@ function SingleEvent({ match, history }) {
   };
 
   return (
-    <MainScreen title="Edit Note">
+    <MainScreen title="Edit Event">
       <Card>
         <Card.Header>Edit your Note</Card.Header>
         <Card.Body>
@@ -151,6 +158,31 @@ function SingleEvent({ match, history }) {
             )}
 
             <Form.Group controlId="content">
+              <Form.Label>Event Batch</Form.Label>
+              <Row>
+                <Col lg={5} md={5} sm={11} xs={11}>
+                  <Form.Control
+                    type="content"
+                    placeholder="Enter the Start Year"
+                    value={startYear}
+                    onChange={(e) => setStartYear(e.target.value)}
+                  />
+                </Col>
+                <Col>
+                  {"-"}
+                </Col>
+                <Col lg={5} md={5} sm={11} xs={11}>
+                  <Form.Control
+                    type="content"
+                    placeholder="Enter the End Year"
+                    value={endYear}
+                    onChange={(e) => setEndYear(e.target.value)}
+                  />
+                </Col>
+              </Row>
+            </Form.Group>
+
+            <Form.Group controlId="content">
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type="content"
@@ -186,7 +218,7 @@ function SingleEvent({ match, history }) {
               <Form.Control
                 type="content"
                 value={link}
-                placeholder="Enter the Meet Link"
+                placeholder="Enter a Relevant Link"
                 onChange={(e) => setLink(e.target.value)}
               />
             </Form.Group>
@@ -223,6 +255,11 @@ function SingleEvent({ match, history }) {
                 custom
               />
             </Form.Group>
+
+            
+            <Card.Text>
+              <Card.Img variant="top" src={pic} style={{objectFit: 'cover', aspectRatio: '16/9'}} />
+            </Card.Text>
 
 
             {loading && <Loading size={50} />}

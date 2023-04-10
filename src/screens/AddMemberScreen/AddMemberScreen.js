@@ -1,36 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import MainScreen from "../../components/MainScreen";
+import { Button, Card, Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { createMemberAction } from "../../actions/memberActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
-import { register } from "../../actions/userActions";
-import MainScreen from "../../components/MainScreen";
-import "./RegisterScreen.css";
+import ReactMarkdown from "react-markdown";
 
-function RegisterScreen({ history }) {
-
-  let currentUserName = null;
-  const userLogin = useSelector((state) => state.userLogin);
-  
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [position, setPosition] = useState("");
-  const [department, setDept] = useState("");
-  const password = "password";
-  const [pic, setPic] = useState(
-    "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-  );
-  const [picMessage, setPicMessage] = useState(null);
-  const [year, setYear] = useState("");
-  const [linkedin, setLinkedin] = useState("");
+function CreateMember({ history }) {
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [position, setPosition] = useState("");
+    const [department, setDept] = useState("");
+    const [pic, setPic] = useState(
+      "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+    );
+    const [picMessage, setPicMessage] = useState(null);
+    const [year, setYear] = useState("");
+    const [startYear, setStartYear] = useState("");
+    const [endYear, setEndYear] = useState("");
+    const [linkedin, setLinkedin] = useState("");
 
   const dispatch = useDispatch();
 
-  const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
-
-  //converting any uploaded image to a link
   const postDetails = (pics) => {
     if (
       pics ===
@@ -60,22 +54,33 @@ function RegisterScreen({ history }) {
     }
   };
 
-  useEffect(() => {
-    if (userInfo) {
-      history.push("/");
-    }
-  }, [history, userInfo]);
+  const memberCreate = useSelector((state) => state.memberCreate);
+  const { loading, error, member } = memberCreate;
+
+  const resetHandler = () => {
+    setEmail("");
+    setName("");
+    setPosition("");
+    setDept("");
+    setYear("");
+    setStartYear("");
+    setEndYear("");
+    setLinkedin("");
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if(userInfo && userInfo.isAdmin)
-      dispatch(register(name, email, password, position, department, pic, year, linkedin));
-    else
-      console.log("User is not admin");
+    dispatch(createMemberAction(name, email, position, department, pic, year, linkedin, startYear, endYear));
+    if (!name || !email || !position) return;
+
+    resetHandler();
+    history.push("/members");
   };
 
+  useEffect(() => {}, []);
+
   return (
-    <MainScreen title="REGISTER">
+    <MainScreen title="ADD MEMBER">
       <div className="loginContainer">
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {loading && <Loading />}
@@ -130,6 +135,31 @@ function RegisterScreen({ history }) {
             />
           </Form.Group>
 
+          <Form.Group controlId="content">
+              <Form.Label>Batch</Form.Label>
+              <Row>
+                <Col lg={5} md={5} sm={11} xs={11}>
+                  <Form.Control
+                    type="content"
+                    placeholder="Enter the Start Year"
+                    value={startYear}
+                    onChange={(e) => setStartYear(e.target.value)}
+                  />
+                </Col>
+                <Col>
+                  {"-"}
+                </Col>
+                <Col lg={5} md={5} sm={11} xs={11}>
+                  <Form.Control
+                    type="content"
+                    placeholder="Enter the End Year"
+                    value={endYear}
+                    onChange={(e) => setEndYear(e.target.value)}
+                  />
+                </Col>
+              </Row>
+            </Form.Group>
+
           <Form.Group controlId="linkedin">
             <Form.Label>LinkedIn</Form.Label>
             <Form.Control
@@ -154,8 +184,25 @@ function RegisterScreen({ history }) {
             />
           </Form.Group>
 
+          <Card.Text>
+            <Card.Img
+              variant="top"
+              src={pic}
+              style={{
+                width: '30%',
+                height: 'auto',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                aspectRatio: '4/5'
+              }}
+            />
+          </Card.Text>
+
           <Button variant="primary" type="submit">
-            Register
+            Add Member
+          </Button>
+          <Button className="mx-2" onClick={resetHandler} variant="danger">
+            Reset Fields
           </Button>
         </Form>
       </div>
@@ -163,4 +210,4 @@ function RegisterScreen({ history }) {
   );
 }
 
-export default RegisterScreen;
+export default CreateMember;
