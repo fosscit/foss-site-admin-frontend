@@ -21,17 +21,25 @@ import {
   memberListReducer,
   memberUpdateReducer,
 } from "./reducers/memberReducers";
+import {
+  galleryCreateReducer,
+  galleryDeleteReducer,
+  galleryListReducer
+} from "./reducers/galleryReducers";
 
 const reducer = combineReducers({
   eventList: eventListReducer,
   messageList: messageListReducer,
   memberList: memberListReducer,
+  galleryList: galleryListReducer,
   userLogin: userLoginReducer,
   eventCreate: eventCreateReducer,
   memberCreate: memberCreateReducer,
+  pictureCreate: galleryCreateReducer,
   eventDelete: eventDeleteReducer,
   messageDelete: messageDeleteReducer,
   memberDelete: memberDeleteReducer,
+  pictureDelete: galleryDeleteReducer,
   eventUpdate: eventUpdateReducer,
   userUpdate: userUpdateReducer,
   memberUpdate: memberUpdateReducer

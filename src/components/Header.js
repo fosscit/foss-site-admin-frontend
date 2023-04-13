@@ -49,6 +49,7 @@ function Header({ setSearch }) {
                 <Nav.Link href="/myevents">Events</Nav.Link>
                 <Nav.Link href="/mymessages">Messages</Nav.Link>
                 <Nav.Link href="/members">Members</Nav.Link>
+                <Nav.Link href="/gallery">Gallery</Nav.Link>
                 
                 {/* <NavDropdown
                   title={"Boardmembers"}

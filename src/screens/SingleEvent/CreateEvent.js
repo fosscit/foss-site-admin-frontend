@@ -208,14 +208,14 @@ function CreateEvent({ history }) {
             <DatePicker selected={date} onChange={date => setDate(date)} />
 
             <Form.Group controlId="pic">
-            <Form.Label>Poster</Form.Label>
-            <Form.File
-                onChange={(e) => postDetails(e.target.files[0])}
-                id="custom-file"
-                type="image/png"
-                label="Upload Poster"
-                custom
-              />
+              <Form.Label>Poster</Form.Label>
+              <Form.File
+                  onChange={(e) => postDetails(e.target.files[0])}
+                  id="custom-file"
+                  type="image/png"
+                  label="Upload Poster"
+                  custom
+                />
             </Form.Group>
 
             <Card.Text>

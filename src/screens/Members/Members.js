@@ -24,9 +24,7 @@ function Members({ history, search }) {
   const [memData, setMemData] = useState([]);
 
   const loadData = (year) => {
-    console.log("load trying");
     const formattedYear = year.replace(/\s+/g, ''); 
-    console.log(formattedYear);
     axios.get(`https://foss-backend.onrender.com/api/members/year/${formattedYear}`)
     .then((res)=>{
       if(res.data && res.data.length > 0) {
