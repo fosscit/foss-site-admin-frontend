@@ -130,6 +130,7 @@ function Gallery({ history, search }) {
       {gallery && (
         <Row>
           {gallery
+          .reverse()
             .map(image => (
               <Col key={image._id} md={4}>
                 <Card>
