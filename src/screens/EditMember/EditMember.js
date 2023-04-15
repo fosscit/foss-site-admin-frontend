@@ -7,6 +7,7 @@ import { updateMemberAction } from "../../actions/memberActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import axios from "axios";
+import API from "../../API/api";
 
 const EditMember = ({ match, history }) => {
   const [name, setName] = useState("");
@@ -28,9 +29,8 @@ const EditMember = ({ match, history }) => {
   const { loading, error, success } = memberUpdate;
 
   useEffect(() => {
-    console.log(match.params.id);
     const fetching = async () => {
-        const uri = "https://foss-backend.onrender.com/api/members/";
+        const uri = `${API}members/`;
         const { data } = await axios.get(`${uri}${match.params.id}`);
         
         setName(data.name);
@@ -49,8 +49,8 @@ const EditMember = ({ match, history }) => {
   }, [match.params.id]);
 
   const submitHandler = (e) => {
-    e.preventDefault();
-
+    e.preventDefault();    
+    if (!name || !position || !startYear || !endYear) return;
     dispatch(updateMemberAction(match.params.id, name, email, position, department, pic, year, linkedin, startYear, endYear));
   };
 

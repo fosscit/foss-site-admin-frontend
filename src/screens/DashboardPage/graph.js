@@ -10,6 +10,7 @@ import {
 	YAxis,
 	CartesianGrid
 } from 'recharts';
+import API from '../../API/api';
 
 const createPData = (data) => {
 	const months = [
@@ -48,7 +49,7 @@ const createPData = (data) => {
 function Graph() {
 	const [pdata, setPData] = useState([]);
 	useEffect(() => {
-		axios.get('https://foss-backend.onrender.com/api/visits')
+		axios.get(`${API}visits`)
 		  .then(response => {
 			setPData(createPData(response.data));
 		  })

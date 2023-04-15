@@ -7,9 +7,9 @@ import {
     MESSAGE_LIST_SUCCESS
   } from "../constants/messageConstants";
   import axios from "axios";
+  import API from "../API/api";
   
-  const uri = "https://foss-backend.onrender.com/api/messages/";
-  // const uri = "http://localhost:5000/api/messages/";
+  const uri = `${API}messages/`;
   
   export const listMessages = () => async (dispatch, getState) => {
     try {

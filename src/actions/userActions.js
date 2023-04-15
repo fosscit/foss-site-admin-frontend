@@ -8,9 +8,9 @@ import {
   USER_UPDATE_SUCCESS
 } from "../constants/userConstants";
 import axios from "axios";
+import API from "../API/api";
 
-const uri = "https://foss-backend.onrender.com/api/users/";
-// const uri = "http://localhost:5000/api/users/";
+const uri = `${API}users/`;
 
 export const login = (email, password) => async (dispatch) => {
   try {

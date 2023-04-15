@@ -13,9 +13,9 @@ import {
   EVENTS_UPDATE_SUCCESS,
 } from "../constants/eventsConstants";
 import axios from "axios";
+import API from "../API/api";
 
-const uri = "https://foss-backend.onrender.com/api/events/event/";
-// const uri = "http://localhost:5000/api/events/event/";
+const uri = `${API}events/event/`;
 
 export const listEvents = () => async (dispatch, getState) => {
   try {

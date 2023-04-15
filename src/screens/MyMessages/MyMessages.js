@@ -56,7 +56,6 @@ function MyMessages({ history, search }) {
           .filter((filteredNote) =>
             filteredNote.name.toLowerCase().includes(search.toLowerCase())
           )
-          .reverse()
           .map((message) => (
             <Accordion>
               <Card style={{ margin: 10 }} key={message._id}>

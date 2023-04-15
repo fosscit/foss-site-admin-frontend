@@ -70,8 +70,8 @@ function CreateMember({ history }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!name || !position || !startYear || !endYear) return;
     dispatch(createMemberAction(name, email, position, department, pic, year, linkedin, startYear, endYear));
-    if (!name || !position) return;
 
     resetHandler();
     history.push("/members");

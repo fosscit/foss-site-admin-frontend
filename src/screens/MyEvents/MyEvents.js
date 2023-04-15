@@ -8,6 +8,7 @@ import { deleteEventAction, listEvents } from "../../actions/eventsActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import axios from "axios";
+import API from "../../API/api";
 
 function MyEvents({ history, search }) {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function MyEvents({ history, search }) {
   const [years, setYears] = useState([]);
 
   useEffect(()=>{
-    axios.get(`https://foss-backend.onrender.com/api/events/years`)
+    axios.get(`${API}events/years`)
     .then((res)=>{
       if(res.data && res.data.length > 0) {
         const years = res.data.map(data => data.year).sort((a, b) => b.localeCompare(a));

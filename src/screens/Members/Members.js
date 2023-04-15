@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createMemberAction, updateMemberAction, deleteMemberAction, listMembers } from "../../actions/memberActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
+import API from "../../API/api";
 
 function Members({ history, search }) {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Members({ history, search }) {
 
   const loadData = (year) => {
     const formattedYear = year.replace(/\s+/g, ''); 
-    axios.get(`https://foss-backend.onrender.com/api/members/year/${formattedYear}`)
+    axios.get(`${API}members/year/${formattedYear}`)
     .then((res)=>{
       if(res.data && res.data.length > 0) {
         setMemData(res.data);
@@ -37,7 +38,7 @@ function Members({ history, search }) {
   };
 
   useEffect(()=>{
-    axios.get(`https://foss-backend.onrender.com/api/members/years`)
+    axios.get(`${API}members/years`)
     .then((res)=>{
       if(res.data && res.data.length > 0) {
         const years = res.data.map(data => data.year).sort((a, b) => b.localeCompare(a));
@@ -135,6 +136,9 @@ function Members({ history, search }) {
                   .map((member) => (
                     <Card key={member._id} style={{ width: '18rem', margin: '10px' }}>
                       <Card.Body>
+                      <Card.Text>
+                        <Card.Img variant="top" src={member.pic} style={{objectFit: 'cover', aspectRatio: '5/4'}} />
+                      </Card.Text>
                         <Card.Title>{member.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{member.position}</Card.Subtitle>
                         <Card.Text>{member.content}</Card.Text>

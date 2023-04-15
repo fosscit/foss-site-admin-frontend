@@ -8,6 +8,7 @@ import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
 import ReactMarkdown from "react-markdown";
 import DatePicker from "react-datepicker";
+import API from "../../API/api";
 
 function SingleEvent({ match, history }) {
   
@@ -74,7 +75,7 @@ function SingleEvent({ match, history }) {
 
   useEffect(() => {
     const fetching = async () => {
-      const uri = "https://foss-backend.onrender.com/api/events/event/";
+      const uri = `${API}events/event/`;
       const { data } = await axios.get(`${uri}${match.params.id}`);
       
       setTitle(data.title);

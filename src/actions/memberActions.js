@@ -13,9 +13,9 @@ import {
     MEMBERS_UPDATE_SUCCESS,
   } from "../constants/memberConstants";
   import axios from "axios";
+  import API from "../API/api";
   
-  const uri = "https://foss-backend.onrender.com/api/members/";
-  // const uri = "http://localhost:5000/api/members/";
+  const uri = `${API}members/`;
   
   export const listMembers = () => async (dispatch, getState) => {
     try {

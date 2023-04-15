@@ -10,9 +10,9 @@ import {
     MEMBERS_GALLERY_LIST_SUCCESS
   } from "../constants/membersGalleryConstants";
   import axios from "axios";
+  import API from "../API/api";
   
-  const uri = "https://foss-backend.onrender.com/api/membersgallery/";
-  // const uri = "http://localhost:5000/api/gallery/";
+  const uri = `${API}membersgallery/`;
   
   export const listGallery = () => async (dispatch, getState) => {
     try {
