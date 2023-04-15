@@ -71,7 +71,7 @@ function CreateMember({ history }) {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(createMemberAction(name, email, position, department, pic, year, linkedin, startYear, endYear));
-    if (!name || !email || !position) return;
+    if (!name || !position) return;
 
     resetHandler();
     history.push("/members");
@@ -110,7 +110,7 @@ function CreateMember({ history }) {
             <Form.Control
               type="name"
               value={position}
-              placeholder="Enter Position"
+              placeholder="Enter Role"
               onChange={(e) => setPosition(e.target.value)}
             />
           </Form.Group>

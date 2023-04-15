@@ -133,7 +133,7 @@ const EditMember = ({ match, history }) => {
                     <Form.Control
                     type="name"
                     value={position}
-                    placeholder="Enter Position"
+                    placeholder="Enter Role"
                     onChange={(e) => setPosition(e.target.value)}
                     />
                 </Form.Group>
