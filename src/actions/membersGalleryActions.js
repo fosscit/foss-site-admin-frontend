@@ -1,23 +1,23 @@
 import {
-    GALLERY_CREATE_FAIL,
-    GALLERY_CREATE_REQUEST,
-    GALLERY_CREATE_SUCCESS,
-    GALLERY_DELETE_FAIL,
-    GALLERY_DELETE_REQUEST,
-    GALLERY_DELETE_SUCCESS,
-    GALLERY_LIST_FAIL,
-    GALLERY_LIST_REQUEST,
-    GALLERY_LIST_SUCCESS
-  } from "../constants/galleryConstants";
+    MEMBERS_GALLERY_CREATE_FAIL,
+    MEMBERS_GALLERY_CREATE_REQUEST,
+    MEMBERS_GALLERY_CREATE_SUCCESS,
+    MEMBERS_GALLERY_DELETE_FAIL,
+    MEMBERS_GALLERY_DELETE_REQUEST,
+    MEMBERS_GALLERY_DELETE_SUCCESS,
+    MEMBERS_GALLERY_LIST_FAIL,
+    MEMBERS_GALLERY_LIST_REQUEST,
+    MEMBERS_GALLERY_LIST_SUCCESS
+  } from "../constants/membersGalleryConstants";
   import axios from "axios";
   
-  const uri = "https://foss-backend.onrender.com/api/gallery/";
+  const uri = "https://foss-backend.onrender.com/api/membersgallery/";
   // const uri = "http://localhost:5000/api/gallery/";
   
   export const listGallery = () => async (dispatch, getState) => {
     try {
       dispatch({
-        type: GALLERY_LIST_REQUEST,
+        type: MEMBERS_GALLERY_LIST_REQUEST,
       });
   
       const {
@@ -33,7 +33,7 @@ import {
       const { data } = await axios.get(uri, config);
   
       dispatch({
-        type: GALLERY_LIST_SUCCESS,
+        type: MEMBERS_GALLERY_LIST_SUCCESS,
         payload: data,
       });
     } catch (error) {
@@ -42,7 +42,7 @@ import {
           ? error.response.data.message
           : error.message;
       dispatch({
-        type: GALLERY_LIST_FAIL,
+        type: MEMBERS_GALLERY_LIST_FAIL,
         payload: message,
       });
     }
@@ -54,7 +54,7 @@ import {
   ) => {
     try {
       dispatch({
-        type: GALLERY_CREATE_REQUEST,
+        type: MEMBERS_GALLERY_CREATE_REQUEST,
       });
   
       const {
@@ -75,7 +75,7 @@ import {
       );
   
       dispatch({
-        type: GALLERY_CREATE_SUCCESS,
+        type: MEMBERS_GALLERY_CREATE_SUCCESS,
         payload: data,
       });
     } catch (error) {
@@ -84,7 +84,7 @@ import {
           ? error.response.data.message
           : error.message;
       dispatch({
-        type: GALLERY_CREATE_FAIL,
+        type: MEMBERS_GALLERY_CREATE_FAIL,
         payload: message,
       });
     }
@@ -93,7 +93,7 @@ import {
   export const deletePictureAction = (id) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: GALLERY_DELETE_REQUEST,
+        type: MEMBERS_GALLERY_DELETE_REQUEST,
       });
   
       const {
@@ -109,7 +109,7 @@ import {
       const { data } = await axios.delete(`${uri}${id}`, config);
   
       dispatch({
-        type: GALLERY_DELETE_SUCCESS,
+        type: MEMBERS_GALLERY_DELETE_SUCCESS,
         payload: data,
       });
     } catch (error) {
@@ -118,7 +118,7 @@ import {
           ? error.response.data.message
           : error.message;
       dispatch({
-        type: GALLERY_DELETE_FAIL,
+        type: MEMBERS_GALLERY_DELETE_FAIL,
         payload: message,
       });
     }

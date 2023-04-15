@@ -129,7 +129,7 @@ const EditMember = ({ match, history }) => {
                 </Form.Group>
 
                 <Form.Group controlId="position">
-                    <Form.Label>Position</Form.Label>
+                    <Form.Label>Role</Form.Label>
                     <Form.Control
                     type="name"
                     value={position}

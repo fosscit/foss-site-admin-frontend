@@ -16,6 +16,7 @@ import Members from "./screens/Members/Members";
 import CreateMember from "./screens/AddMemberScreen/AddMemberScreen";
 import EditMember from "./screens/EditMember/EditMember";
 import Gallery from "./screens/Gallery/Gallery";
+import MembersGallery from "./screens/MembersGallery/MembersGallery";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -52,6 +53,7 @@ function App() {
         <Route path="/profile" component={ProfileScreen} />
         <Route path="/addmember" component={CreateMember} />
         <Route path="/gallery" component={Gallery} />
+        <Route path="/membersgallery" component={MembersGallery} />
         <Route path="/member/:id" component={EditMember} />
       </main>
       <Footer />

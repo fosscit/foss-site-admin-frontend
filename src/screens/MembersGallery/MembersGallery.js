@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Row, Col, Form } from "react-bootstrap";
 import MainScreen from "../../components/MainScreen";
 import { useDispatch, useSelector } from "react-redux";
-import { createPictureAction, deletePictureAction, listGallery } from "../../actions/galleryActions";
+import { createPictureAction, deletePictureAction, listGallery } from "../../actions/membersGalleryActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 
@@ -14,21 +14,21 @@ function Gallery({ history, search }) {
   );
   const [picMessage, setPicMessage] = useState("");
   
-  const galleryList = useSelector((state) => state.galleryList);
-  const { loading, error, gallery } = galleryList;
+  const membersGalleryList = useSelector((state) => state.membersGalleryList);
+  const { loading, error, membersGallery } = membersGalleryList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  const pictureDelete = useSelector((state) => state.pictureDelete);
+  
+  const membersPictureDelete = useSelector((state) => state.membersPictureDelete);
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = pictureDelete;
+  } = membersPictureDelete;
 
-  const pictureCreate = useSelector((state) => state.pictureCreate);
-  const { success: successCreate } = pictureCreate;
+  const membersPictureCreate = useSelector((state) => state.membersPictureCreate);
+  const { success: successCreate } = membersPictureCreate;
 
   const postDetails = (pics) => {
     if (
@@ -75,7 +75,7 @@ function Gallery({ history, search }) {
   const submitHandler = (e) => {    
     e.preventDefault();
     dispatch(createPictureAction(pic));
-    history.push("/gallery");
+    history.push("/membersgallery");
   };
 
   const deleteHandler = (id) => {
@@ -117,7 +117,7 @@ function Gallery({ history, search }) {
         </Card.Text>
       </Form>   
       
-      <h3 style={{ marginTop: '50px', marginBottom: '0' }}>{"Event Gallery"}</h3>
+      <h3 style={{ marginTop: '50px', marginBottom: '0' }}>{"Members Gallery"}</h3>
       <hr />
       {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
       {errorDelete && (
@@ -125,9 +125,9 @@ function Gallery({ history, search }) {
       )}
       {loading && <Loading />}
       {loadingDelete && <Loading />}
-      {gallery && (
+      {membersGallery && (
         <Row>
-          {gallery
+          {membersGallery
           .reverse()
             .map(image => (
               <Col key={image._id} md={4}>

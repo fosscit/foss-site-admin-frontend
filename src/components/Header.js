@@ -49,28 +49,19 @@ function Header({ setSearch }) {
                 <Nav.Link href="/myevents">Events</Nav.Link>
                 <Nav.Link href="/mymessages">Messages</Nav.Link>
                 <Nav.Link href="/members">Members</Nav.Link>
-                <Nav.Link href="/gallery">Gallery</Nav.Link>
-                
-                {/* <NavDropdown
-                  title={"Boardmembers"}
+                <NavDropdown
+                  title={'Gallery'}
                   id="collasible-nav-dropdown"
                 >
-                  <NavDropdown.Item href="/members">
-                    Members
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/addmember">
-                    Add Member
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="/editmember">
-                    Edit Member Details
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="/removemember">
-                    Remove Member
+                  <NavDropdown.Item href="/gallery">
+                    Event Gallery
                   </NavDropdown.Item>
 
-                </NavDropdown> */}
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href='/membersgallery'>
+                    Members Gallery
+                  </NavDropdown.Item>
+                </NavDropdown>
                 <NavDropdown
                   title={`${userInfo.name}`}
                   id="collasible-nav-dropdown"
