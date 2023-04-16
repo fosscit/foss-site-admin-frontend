@@ -40,9 +40,9 @@ const EditMember = ({ match, history }) => {
         setYear(data.year);
         setLinkedin(data.linkedin);
         setPic(data.pic);
-        const [startYr, endYr] = data.period.split("-").map(str => str.trim());
+        const [startYr, endYr] = data.period.split(" - ");
         setStartYear(startYr);
-        setEndYear(endYr);
+        setEndYear('20' + endYr);
     };
 
     fetching();
