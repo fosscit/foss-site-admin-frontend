@@ -95,6 +95,12 @@ const EditMember = ({ match, history }) => {
     setPic("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg");
   };
 
+  const clubRoles = [
+      "Secretary", "Joint Secretary", "Treasurer", "Head of External Affairs", "Public Relations Team",
+      "Social Media Head", "Social Media Content Team", "Head of Editing Team", "Editing Team", "Content Writing",
+      "Innovation Head", "Event Manager", "Head of Technical Team", "Technical Team"
+  ];
+
   return (
     <MainScreen title="EDIT MEMBER">
       <div>
@@ -129,13 +135,27 @@ const EditMember = ({ match, history }) => {
                 </Form.Group>
 
                 <Form.Group controlId="position">
-                    <Form.Label>Role</Form.Label>
-                    <Form.Control
-                    type="name"
+                  <Form.Label>Role</Form.Label>
+                  <Form.Control
+                    as="select"
                     value={position}
-                    placeholder="Enter Role"
                     onChange={(e) => setPosition(e.target.value)}
+                  >
+                    <option value="">-- Select Role --</option>
+                    {clubRoles.map((role) => (
+                      <option key={role} value={role}>
+                        {role}
+                      </option>
+                    ))}
+                    <option value="custom">Custom</option>
+                  </Form.Control>
+                  {position === "custom" && (
+                    <Form.Control
+                      type="name"
+                      placeholder="Enter Custom Role"
+                      onChange={(e) => setPosition(e.target.value)}
                     />
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="department">
