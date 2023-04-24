@@ -1,2 +1,2 @@
-const API = "http://localhost:5000/api/";
+const API = "https://foss-web-server.onrender.com/api/";
 export default API;
