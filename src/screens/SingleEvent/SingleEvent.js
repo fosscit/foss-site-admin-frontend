@@ -12,9 +12,9 @@ import API from "../../API/api";
 
 function SingleEvent({ match, history }) {
   
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
-  const [category, setCategory] = useState();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [eventDate, setEventDate] = useState(new Date());
   const [time, setTime] = useState("");
@@ -82,7 +82,7 @@ function SingleEvent({ match, history }) {
       setContent(data.content);
       setCategory(data.category);
       setDate(data.updatedAt);
-      setEventDate(new Date(data.eventDate.slice(0, 10)));
+      setEventDate(new Date(data.eventDate));
       setTime(data.time);
       setVenue(data.venue);
       setLink(data.link);

@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { useState } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import LandingPage from "./screens/LandingPage/LandingPage";
@@ -8,7 +9,6 @@ import MyEvents from "./screens/MyEvents/MyEvents";
 import SingleEvent from "./screens/SingleEvent/SingleEvent";
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import CreateEvent from "./screens/SingleEvent/CreateEvent";
-import { useState } from "react";
 import Graph from "./screens/DashboardPage/graph"
 import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
 import MyMessages from "./screens/MyMessages/MyMessages";

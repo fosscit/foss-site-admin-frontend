@@ -82,7 +82,6 @@ function MyEvents({ history, search }) {
 
   return (
     <MainScreen title={`Welcome Back ${userInfo && userInfo.name}..`}>
-      
       {buttons}
       <Link to="/createevent">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
