@@ -82,7 +82,7 @@ function CreateMember({ history }) {
   const clubRoles = [
       "Secretary", "Joint Secretary", "Treasurer", "Head of External Affairs", "Public Relations Team",
       "Social Media Head", "Social Media Content Team", "Head of Editing Team", "Editing Team", "Content Writing",
-      "Innovation Head", "Event Manager", "Head of Technical Team", "Technical Team"
+      "Innovation Head", "Head of Event Management", "Event Manager", "Head of Technical Team", "Technical Team"
   ];
 
   return (
