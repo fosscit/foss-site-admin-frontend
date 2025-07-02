@@ -55,7 +55,7 @@ const EditMember = ({ match, history }) => {
       return;
 
     const finalPosition = position==='custom'? customPosition : position;
-    dispatch(updateMemberAction(match.params.id, name, email, position, department, pic, year, linkedin, startYear, endYear));
+    dispatch(updateMemberAction(match.params.id, name, email, finalPosition, department, pic, year, linkedin, startYear, endYear));
   };
 
   const postDetails = (pics) => {
