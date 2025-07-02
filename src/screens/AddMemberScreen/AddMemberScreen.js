@@ -13,6 +13,7 @@ function CreateMember({ history }) {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [position, setPosition] = useState("");
+    const [customPosition, setCustomPosition] = useState(""); //to introduce new role
     const [department, setDept] = useState("");
     const [pic, setPic] = useState(
       "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
@@ -71,7 +72,8 @@ function CreateMember({ history }) {
   const submitHandler = (e) => {
     e.preventDefault();
     if (!name || !position || !startYear || !endYear) return;
-    dispatch(createMemberAction(name, email, position, department, pic, year, linkedin, startYear, endYear));
+    const finalPosition = position==='custom'? customPosition : position;
+    dispatch(createMemberAction(name, email, finalPosition, department, pic, year, linkedin, startYear, endYear));
 
     resetHandler();
     history.push("/members");
@@ -128,9 +130,10 @@ function CreateMember({ history }) {
             </Form.Control>
             {position === "custom" && (
               <Form.Control
-                type="name"
+                type="text"
                 placeholder="Enter Custom Role"
-                onChange={(e) => setPosition(e.target.value)}
+                value={customPosition}
+                onChange={(e) => setCustomPosition(e.target.value)}
               />
             )}
           </Form.Group>
@@ -218,7 +221,7 @@ function CreateMember({ history }) {
             />
           </Card.Text>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" >
             Add Member
           </Button>
           <Button className="mx-2" onClick={resetHandler} variant="danger">
