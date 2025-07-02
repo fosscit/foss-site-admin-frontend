@@ -13,6 +13,7 @@ const EditMember = ({ match, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
+  const [customPosition, setCustomPosition] = useState("");
   const [department, setDept] = useState("");
   const [pic, setPic] = useState(
     "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
@@ -50,7 +51,10 @@ const EditMember = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();    
-    if (!name || !position || !startYear || !endYear) return;
+    if (!name || !position || !startYear || !endYear) 
+      return;
+
+    const finalPosition = position==='custom'? customPosition : position;
     dispatch(updateMemberAction(match.params.id, name, email, position, department, pic, year, linkedin, startYear, endYear));
   };
 
@@ -151,9 +155,10 @@ const EditMember = ({ match, history }) => {
                   </Form.Control>
                   {position === "custom" && (
                     <Form.Control
-                      type="name"
+                      type="text"
                       placeholder="Enter Custom Role"
-                      onChange={(e) => setPosition(e.target.value)}
+                      value={customPosition}
+                      onChange={(e) => setCustomPosition(e.target.value)}
                     />
                   )}
                 </Form.Group>
